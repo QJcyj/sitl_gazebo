@@ -14,15 +14,27 @@
                <mesh scale="0.1 0.1 0.1" filename="model://rotors_description/meshes/cessna.dae" />
             </geometry>
          </visual>
-         <collision name="collision">
+         <collision name='base_link_collision'>
+            <origin xyz="0.0 0 0.0" rpy="0 0 0" />
             <geometry>
-               <mesh scale="0.1 0.1 0.1" filename="model://rotors_description/meshes/cessna.dae" />
+               <box size="0.47 0.47 0.11"/>
             </geometry>
+            <surface>
+               <contact>
+                  <ode>
+                  <max_vel>10</max_vel>
+                  <min_depth>0.01</min_depth>
+                  </ode>
+               </contact>
+            </surface>
          </collision>
       </link>
+      <gazebo reference="base_link">
+         <material>Gazebo/DarkGrey</material>
+      </gazebo>
       <gazebo>
          <link name='rotor_puller'>
-            <pose>0.3 0 0.0 0 1.57 0</pose>
+            <pose>0.235 0 0.087 0 1.57 0</pose>
             <inertial>
             <pose>0 0 0 0 0 0</pose>
             <mass>0.005</mass>
