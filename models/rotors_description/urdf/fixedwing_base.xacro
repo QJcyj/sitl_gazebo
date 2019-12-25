@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+   <!-- Main multirotor link -->
+   <xacro:macro name="fixedwing_base_macro" params="">	   
+      <!-- BODY -->
+      <link name="base_link">
+         <inertial>
+            <mass value="1.5" />
+            <inertia ixx="0.197563" ixy="0.0" iyy="0.1458929" ixz="0.0" iyz="0.0" izz="0.1477" />
+            <origin xyz="0.0 0 0.0" rpy="0 0 0" />
+         </inertial>
+         <visual>
+            <geometry>
+               <mesh scale="0.1 0.1 0.1" filename="model://rotors_description/meshes/cessna.dae" />
+            </geometry>
+         </visual>
+         <collision name="collision">
+            <geometry>
+               <mesh scale="0.1 0.1 0.1" filename="model://rotors_description/meshes/cessna.dae" />
+            </geometry>
+         </collision>
+      </link>
+	   	   	   	   
+      <!-- ELEVATORS-->
+      <!-- <link name="elevator">
+         <inertial>
+            <mass value="0.00001" />
+            <inertia ixx="0.00381666666667" ixy="0.0" ixz="0.0" iyy="0.0036" iyz="0.0" izz="0.00381666666667" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
+         </inertial>
+         <collision name="collision">
+            <geometry>
+               <mesh filename="package://ardupilot_sitl_gazebo_plugin/meshes/meshes_drones/cessna/elevators.dae" />
+            </geometry>
+            <origin xyz="5.55 0 -0.57" rpy="0 0 0" />
+         </collision>
+         <visual name="visual">
+            <geometry>
+               <mesh filename="package://ardupilot_sitl_gazebo_plugin/meshes/meshes_drones/cessna/elevators.dae" />
+            </geometry>
+            <origin xyz="5.55 0 -0.57" rpy="0 0 0" />
+         </visual>
+      </link> -->
+	   
+      <!-- ELEVATORS JOINT-->
+      <!-- <joint name="elevator_joint" type="revolute">
+         <parent link="body" />
+         <child link="elevator" />
+         <origin xyz="-5.55 0 0.57" rpy="0 0 0" />
+         <axis xyz="0 1 0" />
+         <limit effort="-1" lower="-0.53" upper="0.53" velocity="-1" />
+         <dynamics damping="1.000" />
+      </joint> -->
+	   
+      <!-- RUDDER-->
+      <!-- <link name="rudder">
+         <inertial>
+            <mass value="0.00001" />
+            <inertia ixx="0.00381666666667" ixy="0.0" ixz="0.0" iyy="0.0036" iyz="0.0" izz="0.00381666666667" />
+            <origin xyz="-0.2 0 0" rpy="0 0 0" />
+         </inertial>
+         <collision name="collision">
+            <geometry>
+               <mesh filename="package://ardupilot_sitl_gazebo_plugin/meshes/meshes_drones/cessna/rudder.dae" />
+            </geometry>
+            <origin xyz="5.1 0 -3.25" rpy="0 0.35 0" />
+         </collision>
+         <visual name="visual">
+            <geometry>
+               <mesh filename="package://ardupilot_sitl_gazebo_plugin/meshes/meshes_drones/cessna/rudder.dae" />
+            </geometry>
+            <origin xyz="5.1 0 -3.25" rpy="0 0.35 0" />
+         </visual>
+      </link> -->
+	   
+      <!-- RUDDER JOINT-->
+      <!-- <joint name="rudder_joint" type="revolute">
+         <parent link="body" />
+         <child link="rudder" />
+         <origin xyz="-5.9 0 1.3" rpy="0 -0.35 0" />
+         <axis xyz="0 0 1" />
+         <limit effort="-1" lower="-0.53" upper="0.53" velocity="-1" />
+         <dynamics damping="1.000" />
+      </joint> -->
+	   
+      <!-- PROPELLER-->
+      <!-- <link name="rotor_puller">
+         <inertial>
+            <mass value="0.005" />
+            <inertia ixx="9.75e-07" ixy="0.00" iyy="0.000166704" ixz="0.00" iyz="0.00" izz="0.000167604" />
+            <origin xyz="0.3 0 0.0" rpy="0 1.57 0" />
+         </inertial>
+         <collision name="collision">
+            <geometry>
+               <cylinder length="0.005" radius="0.1"/>
+            </geometry>
+         </collision>
+         <visual name="visual">
+            <geometry>
+               <uri>model://rotors_description/meshes/iris_prop_ccw.dae</uri>
+            </geometry>
+         </visual>
+      </link> -->
+	   
+      <!-- PROPELLER JOINT-->
+      <!-- <joint name="rotor_puller_joint" type="revolute">
+         <parent link="body" />
+         <child link="propeller" />
+         <origin xyz="1.79 0 0.855" rpy="0 0 0" />
+         <axis xyz="1 0 0" />
+         <limit effort="-1" lower="-1e+16" upper="1e+16" velocity="-1" />
+           <dynamics damping="0.001" />
+      </joint> -->
+      <!-- <gazebo reference="right_aileron_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo>
+      <gazebo reference="left_aileron_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo>
+      <gazebo reference="left_flap_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo>
+      <gazebo reference="right_flap_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo>
+      <gazebo reference="rudder_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo>
+      <gazebo reference="elevator_joint">
+         <implicitSpringDamper>1</implicitSpringDamper>
+      </gazebo> -->
+
+      <gazebo>
+         <link name='rotor_puller'>
+            <pose>0.3 0 0.0 0 1.57 0</pose>
+            <inertial>
+            <pose>0 0 0 0 0 0</pose>
+            <mass>0.005</mass>
+            <inertia>
+               <ixx>9.75e-07</ixx>
+               <ixy>0</ixy>
+               <ixz>0</ixz>
+               <iyy>0.000166704</iyy>
+               <iyz>0</iyz>
+               <izz>0.000167604</izz>
+            </inertia>
+            </inertial>
+            <collision name='rotor_puller_collision'>
+            <pose>0.0 0 0.0 0 0 0</pose>
+            <geometry>
+               <cylinder>
+                  <length>0.005</length>
+                  <radius>0.1</radius>
+               </cylinder>
+            </geometry>
+            <surface>
+               <contact>
+                  <ode/>
+               </contact>
+               <friction>
+                  <ode/>
+               </friction>
+            </surface>
+            </collision>
+            <visual name='rotor_puller_visual'>
+            <pose>0 0 -0.09 0 0 0</pose>
+            <geometry>
+               <mesh>
+                  <scale>1 1 1</scale>
+                  <uri>model://plane/meshes/iris_prop_ccw.dae</uri>
+               </mesh>
+            </geometry>
+            <material>
+               <script>
+                  <name>Gazebo/Blue</name>
+                  <uri>__default__</uri>
+               </script>
+            </material>
+            </visual>
+            <gravity>1</gravity>
+            <velocity_decay/>
+            <self_collide>0</self_collide>
+         </link>
+         <joint name='rotor_puller_joint' type='revolute'>
+            <child>rotor_puller</child>
+            <parent>base_link</parent>
+            <axis>
+            <xyz>1 0 0</xyz>
+            <limit>
+               <lower>-1e+16</lower>
+               <upper>1e+16</upper>
+            </limit>
+            <dynamics>
+               <spring_reference>0</spring_reference>
+               <spring_stiffness>0</spring_stiffness>
+            </dynamics>
+            <use_parent_model_frame>1</use_parent_model_frame>
+            </axis>
+         </joint>
+         <link name="left_elevon">
+            <inertial>
+            <mass>0.00000001</mass>
+            <inertia>
+               <ixx>0.000001</ixx>
+               <ixy>0.0</ixy>
+               <iyy>0.000001</iyy>
+               <ixz>0.0</ixz>
+               <iyz>0.0</iyz>
+               <izz>0.000001</izz>
+            </inertia>
+            <pose>0 0.3 0 0.00 0 0.0</pose>
+            </inertial>
+            <visual name='left_elevon_visual'>
+               <pose>0.07 0.0 -0.08 0.00 0 0.0</pose>
+               <geometry>
+                  <mesh>
+                     <scale>0.1 0.1 0.1</scale>
+                     <uri>model://rotors_description/meshes/left_aileron.dae</uri>
+                  </mesh>
+               </geometry>
+               <material>
+                  <script>
+                     <name>Gazebo/Blue</name>
+                     <uri>__default__</uri>
+                  </script>
+               </material>
+            </visual>
+         </link>
+         <link name="right_elevon">
+            <inertial>
+            <mass>0.00000001</mass>
+            <inertia>
+               <ixx>0.000001</ixx>
+               <ixy>0.0</ixy>
+               <iyy>0.000001</iyy>
+               <ixz>0.0</ixz>
+               <iyz>0.0</iyz>
+               <izz>0.000001</izz>
+            </inertia>
+            <pose>0 -0.3 0 0.00 0 0.0</pose>
+            </inertial>
+            <visual name='right_elevon_visual'>
+               <pose>0.07 0.0 -0.08 0.00 0 0.0</pose>
+               <geometry>
+                  <mesh>
+                     <scale>0.1 0.1 0.1</scale>
+                     <uri>model://rotors_description/meshes/right_aileron.dae</uri>
+                  </mesh>
+               </geometry>
+               <material>
+                  <script>
+                     <name>Gazebo/Blue</name>
+                     <uri>__default__</uri>
+                  </script>
+               </material>
+            </visual>
+         </link>
+         <link name="elevator">
+            <inertial>
+            <mass>0.00000001</mass>
+            <inertia>
+               <ixx>0.000001</ixx>
+               <ixy>0.0</ixy>
+               <iyy>0.000001</iyy>
+               <ixz>0.0</ixz>
+               <iyz>0.0</iyz>
+               <izz>0.000001</izz>
+            </inertia>
+            <pose> -0.5 0 0 0.00 0 0.0</pose>
+            </inertial>
+            <visual name='elevator_visual'>
+            <pose>0.07 0.0 -0.08 0.00 0 0.0</pose>
+            <geometry>
+               <mesh>
+                  <scale>0.1 0.1 0.1</scale>
+                  <uri>model://rotors_description/meshes/elevators.dae</uri>
+               </mesh>
+            </geometry>
+            <material>
+               <script>
+                  <name>Gazebo/Blue</name>
+                  <uri>__default__</uri>
+               </script>
+            </material>
+            </visual>
+         </link>
+         <link name="rudder">
+            <inertial>
+               <mass>0.00000001</mass>
+               <inertia>
+                  <ixx>0.000001</ixx>
+                  <ixy>0.0</ixy>
+                  <iyy>0.000001</iyy>
+                  <ixz>0.0</ixz>
+                  <iyz>0.0</iyz>
+                  <izz>0.000001</izz>
+               </inertia>
+               <pose>-0.5 0 0.05 0 0 0 </pose>
+            </inertial>
+               <visual name='rudder_visual'>
+               <pose>0.07 0.0 -0.08 0.00 0 0.0</pose>
+               <geometry>
+                  <mesh>
+                     <scale>0.1 0.1 0.1</scale>
+                     <uri>model://rotors_description/meshes/rudder.dae</uri>
+                  </mesh>
+               </geometry>
+               <material>
+                  <script>
+                     <name>Gazebo/Blue</name>
+                     <uri>__default__</uri>
+                  </script>
+               </material>
+            </visual>
+         </link>
+         <joint name='right_elevon_joint' type='revolute'>
+            <parent>base_link</parent>
+            <child>right_elevon</child>
+            <pose>0 -0.3 0 0.00 0 0.0</pose>
+            <axis>
+            <xyz>0 1 0</xyz>
+            <limit>
+               <!-- -30/+30 deg. -->
+               <lower>-0.53</lower>
+               <upper>0.53</upper>
+            </limit>
+            <dynamics>
+               <damping>1.000</damping>
+            </dynamics>
+            </axis>
+            <physics>
+            <ode>
+               <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+            </physics>
+         </joint>
+         <joint name='left_elevon_joint' type='revolute'>
+            <parent>base_link</parent>
+            <child>left_elevon</child>
+            <pose>0 0.3 0 0.00 0 0.0</pose>
+            <axis>
+            <xyz>0 1 0</xyz>
+            <limit>
+               <!-- -30/+30 deg. -->
+               <lower>-0.53</lower>
+               <upper>0.53</upper>
+            </limit>
+            <dynamics>
+               <damping>1.000</damping>
+            </dynamics>
+            </axis>
+            <physics>
+            <ode>
+               <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+            </physics>
+         </joint>
+         <joint name='elevator_joint' type='revolute'>
+            <parent>base_link</parent>
+            <child>elevator</child>
+            <pose> -0.5 0 0 0 0 0</pose>
+            <axis>
+            <xyz>0 1 0</xyz>
+            <limit>
+               <!-- -30/+30 deg. -->
+               <lower>-0.53</lower>
+               <upper>0.53</upper>
+            </limit>
+            <dynamics>
+               <damping>1.000</damping>
+            </dynamics>
+            </axis>
+            <physics>
+            <ode>
+               <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+            </physics>
+         </joint>
+         <joint name='rudder_joint' type='revolute'>
+            <parent>base_link</parent>
+            <child>rudder</child>
+            <pose>-0.5 0 0.05 0.00 0 0.0</pose>
+            <axis>
+            <xyz>1 0 0</xyz>
+            <limit>
+               <!-- -30/+30 deg. -->
+               <lower>-0.01</lower>
+               <upper>0.01</upper>
+            </limit>
+            <dynamics>
+               <damping>1.000</damping>
+            </dynamics>
+            </axis>
+            <physics>
+            <ode>
+               <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+            </physics>
+         </joint>
+         <plugin name="left_wing" filename="libLiftDragPlugin.so">
+            <a0>0.05984281113</a0>
+            <cla>4.752798721</cla>
+            <cda>0.6417112299</cda>
+            <cma>-1.8</cma>
+            <alpha_stall>0.3391428111</alpha_stall>
+            <cla_stall>-3.85</cla_stall>
+            <cda_stall>-0.9233984055</cda_stall>
+            <cma_stall>0</cma_stall>
+            <cp>-0.05 0.3 0.05</cp>
+            <area>0.12</area>
+            <air_density>1.2041</air_density>
+            <forward>1 0 0</forward>
+            <upward>0 0 1</upward>
+            <link_name>base_link</link_name>
+            <control_joint_name>
+               left_elevon_joint
+            </control_joint_name>
+            <control_joint_rad_to_cl>-0.5</control_joint_rad_to_cl>
+         </plugin>
+         <plugin name="right_wing" filename="libLiftDragPlugin.so">
+            <a0>0.05984281113</a0>
+            <cla>4.752798721</cla>
+            <cda>0.6417112299</cda>
+            <cma>-1.8</cma>
+            <alpha_stall>0.3391428111</alpha_stall>
+            <cla_stall>-3.85</cla_stall>
+            <cda_stall>-0.9233984055</cda_stall>
+            <cma_stall>0</cma_stall>
+            <cp>-0.05 -0.3 0.05</cp>
+            <area>0.12</area>
+            <air_density>1.2041</air_density>
+            <forward>1 0 0</forward>
+            <upward>0 0 1</upward>
+            <link_name>base_link</link_name>
+            <control_joint_name>
+               right_elevon_joint
+            </control_joint_name>
+            <control_joint_rad_to_cl>-0.5</control_joint_rad_to_cl>
+         </plugin>
+         <plugin name="elevator" filename="libLiftDragPlugin.so">
+            <a0>-0.2</a0>
+            <cla>4.752798721</cla>
+            <cda>0.6417112299</cda>
+            <cma>-1.8</cma>
+            <alpha_stall>0.3391428111</alpha_stall>
+            <cla_stall>-3.85</cla_stall>
+            <cda_stall>-0.9233984055</cda_stall>
+            <cma_stall>0</cma_stall>
+            <cp>-0.5 0 0</cp>
+            <area>0.01</area>
+            <air_density>1.2041</air_density>
+            <forward>1 0 0</forward>
+            <upward>0 0 1</upward>
+            <link_name>base_link</link_name>
+            <control_joint_name>
+            elevator_joint
+            </control_joint_name>
+            <control_joint_rad_to_cl>-4.0</control_joint_rad_to_cl>
+         </plugin>
+         <plugin name="rudder" filename="libLiftDragPlugin.so">
+            <a0>0.0</a0>
+            <cla>4.752798721</cla>
+            <cda>0.6417112299</cda>
+            <cma>-1.8</cma>
+            <alpha_stall>0.3391428111</alpha_stall>
+            <cla_stall>-3.85</cla_stall>
+            <cda_stall>-0.9233984055</cda_stall>
+            <cma_stall>0</cma_stall>
+            <cp>-0.5 0 0.05</cp>
+            <area>0.02</area>
+            <air_density>1.2041</air_density>
+            <forward>1 0 0</forward>
+            <upward>0 1 0</upward>
+            <link_name>base_link</link_name>
+         </plugin>
+         <plugin name='puller' filename='libgazebo_motor_model.so'>
+            <robotNamespace></robotNamespace>
+            <jointName>rotor_puller_joint</jointName>
+            <linkName>rotor_puller</linkName>
+            <turningDirection>cw</turningDirection>
+            <timeConstantUp>0.0125</timeConstantUp>
+            <timeConstantDown>0.025</timeConstantDown>
+            <maxRotVelocity>3500</maxRotVelocity>
+            <motorConstant>8.54858e-06</motorConstant>
+            <momentConstant>0.01</momentConstant>
+            <commandSubTopic>/gazebo/command/motor_speed</commandSubTopic>
+            <motorNumber>4</motorNumber>
+            <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
+            <rollingMomentCoefficient>1e-06</rollingMomentCoefficient>
+            <motorSpeedPubTopic>/motor_speed/4</motorSpeedPubTopic>
+            <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
+         </plugin>
+      </gazebo>	  	  
+   </xacro:macro>
+</robot>
